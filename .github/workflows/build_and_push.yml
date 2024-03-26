@@ -20,9 +20,6 @@ jobs:
         
       - name: docker build
         run: docker build . -t ${{ secrets.DOCKER_USER }}/${{ secrets.REPO_NAME }}:${{ github.sha }}_${{ github.run_attempt }}
-
-      # - name: docker tag
-      #   run: docker tag our_py_img:${{ github.sha }}_${{ github.run_attempt }} ${{ secrets.DOCKER_USER }}/${{ secrets.REPO_NAME }}
         
       - name: docker push
         run: docker push ${{ secrets.DOCKER_USER }}/${{ secrets.REPO_NAME }}:${{ github.sha }}_${{ github.run_attempt }}

@@ -6,17 +6,13 @@ on:
   workflow_dispatch:
   
 jobs:
-  pull_repo:
-    name: clone repository from github to ubuntu machine
+  build:
+    name: build image using Dockerfile
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         
-  build:
-    name: build image using Dockerfile
-    runs-on: ubuntu-latest
-    steps:
       - name: docker login 
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASS }}
         

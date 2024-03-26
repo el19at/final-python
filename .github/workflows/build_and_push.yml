@@ -17,7 +17,7 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASS }}
         
       - name: docker build
-        run: docker build . -t ${{ secrets.DOCKER_USER }}/our_py_img_${{ github.run_attempt }}
+        run: docker build . -t our_py_img_${{ github.run_attempt }}
 
   push:
     needs: build
@@ -25,4 +25,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: docker push
-        run: docker push ${{ secrets.DOCKER_USER }}/our_py_img_${{ github.run_attempt }}
+        run: docker push el19at/final_python_repo:our_py_img_${{ github.run_attempt }}

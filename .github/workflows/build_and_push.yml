@@ -14,4 +14,12 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASS }}
         
       - name: docker build
-        run: docker build . -t our_py_img_${{ github.run_attempt }}
+        run: docker build . -t final_project_devops/our_py_img_${{ github.run_attempt }}
+
+  push:
+    needs: build
+    name: push docker image to dockerhub
+    runs-on: ubuntu-latest
+    steps:
+      - name: docker push
+        run: docker push final_project_devops/our_py_img_${{ github.run_attempt }}

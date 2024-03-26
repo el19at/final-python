@@ -7,3 +7,6 @@ cd Python-3.7.4
 ./configure --enable-optimizations
 make -j 8
 make altinstall
+cd ..
+apt install python3-pip
+python -m pip install -r /src/app/requirements.txt

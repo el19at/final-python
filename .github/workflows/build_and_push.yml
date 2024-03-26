@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
   
 jobs:
-  build:
+  build_and_push:
     name: build image using Dockerfile
     runs-on: ubuntu-latest
     steps:
@@ -21,12 +21,18 @@ jobs:
       - name: docker build
         run: docker build . -t our_py_img:${{ github.sha }}_${{ github.run_attempt }}
 
-  push:
-    needs: build
-    name: push docker image to dockerhub
-    runs-on: ubuntu-latest
-    steps:
       - name: docker tag
         run: docker tag our_py_img:${{ github.sha }}_${{ github.run_attempt }} ${{ secrets.DOCKER_USER }}/${{ secrets.REPO_NAME }}
+        
       - name: docker push
         run: docker push ${{ secrets.DOCKER_USER }}/${{ secrets.REPO_NAME }}
+
+  # push:
+  #   needs: build
+  #   name: push docker image to dockerhub
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: docker tag
+  #       run: docker tag our_py_img:${{ github.sha }}_${{ github.run_attempt }} ${{ secrets.DOCKER_USER }}/${{ secrets.REPO_NAME }}
+  #     - name: docker push
+  #       run: docker push ${{ secrets.DOCKER_USER }}/${{ secrets.REPO_NAME }}

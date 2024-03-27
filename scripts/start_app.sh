@@ -1,2 +1,2 @@
 #!/bin/bash
-python /src/app/app.py
+docker run --name py_server_doc -p 8081:5000 py_sever 

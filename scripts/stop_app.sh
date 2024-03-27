@@ -1,2 +1,2 @@
 #!/bin/bash
-pkill -9 python
+sudo docker stop py_server
